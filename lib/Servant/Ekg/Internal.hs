@@ -65,7 +65,7 @@ responseTimeDistribution dist application request respond =
         t2 <- getTime Monotonic
         let
             dt = t2 - t1
-            milliseconds = fromRational $ toRational (sec dt) * 1000 + toRational (nsec dt) / (1_000_000)
+            milliseconds = fromIntegral (sec dt) * 1000 + fromIntegral (nsec dt) / (1_000_000)
         Distribution.add dist milliseconds
 
 initializeMeters :: Store -> APIEndpoint -> IO Meters
